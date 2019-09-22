@@ -1,0 +1,25 @@
+namespace: ${namespace}
+stacker_bucket: ${namespace}-${region}
+
+sys_path: ./
+tags:
+  shared: arn:aws:iam::12345567890:role/AWSControlTowerExecution
+  dev: arn:aws:iam::23455678901:role/AWSControlTowerExecution
+  prod: arn:aws:iam::34556789012:role/AWSControlTowerExecution
+
+lookups:
+    xxref: hooks.xxref_lookup.handle
+
+pre_build:
+  - path: hooks.test_hook.print_result
+    required: true
+    data_key: json # top level key in hook data
+    args:
+      vpc_id: ${xxref shared/ttanlab-shared-vpc::VpcId}
+      dev_vpc_id: ${xxref dev@us-west-2/ttanlab-dev-vpc::VpcId}
+      prod_vpc_id: ${xxref prod@us-west-2/ttanlab-prod-vpc::VpcId}
+
+stacks:
+  - name: tag-on-create
+    class_path: modules.test01.BlueprintClass
+    enabled: true
