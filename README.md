@@ -29,14 +29,14 @@ the lookup Syntax is:
 ```
       Syntax:  <tag>@<region>/<stack_name>::<output_name>
           or   <tag>/<stack_name>::<output_name>
-      Eample: shared@us-west-2/lisi-aero-shared-vpc::VpcId
-          or: shared/lisi-aero-shared-vpc::VpcId
+      Eample: shared@us-west-2/lab-shared-vpc::VpcId
+          or: shared/lab-shared-vpc::VpcId
 ```
 Example snippet:
 ```
     args:
-      vpc_id: ${xxref shared/lisi-aero-shared-vpc::VpcId}
-      dev_vpc_id: ${xxref dev@us-west-2/lisi-aero-dev-vpc::VpcId}
+      vpc_id: ${xxref shared/lab-shared-vpc::VpcId}
+      dev_vpc_id: ${xxref dev@us-west-2/lab-dev-vpc::VpcId}
 ```
 
 Run test
